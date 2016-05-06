@@ -55,7 +55,7 @@
 	)
 
 
-/datum/intercept_text/proc/build(var/mode_type, datum/mind/correct_person)
+/datum/intercept_text/proc/build(mode_type, datum/mind/correct_person)
 	switch(mode_type)
 		if("revolution")
 			src.text = ""
@@ -81,13 +81,13 @@
 			src.text = ""
 			src.build_traitor(correct_person)
 			return src.text
-		if("malf")
-			src.text = ""
-			src.build_malf(correct_person)
-			return src.text
 		if("changeling","traitorchan")
 			src.text = ""
 			src.build_changeling(correct_person)
+			return src.text
+		if("shadowling")
+			src.text = ""
+			src.build_shadowling(correct_person)
 			return src.text
 		else
 			return null
@@ -249,13 +249,6 @@
 	src.text += "the most trusted crew-members."
 	src.text += "<BR><HR>"
 
-/datum/intercept_text/proc/build_malf(datum/mind/correct_person)
-	var/a_name = pick(src.anomalies)
-	src.text += "<BR><BR>A <B><U>[a_name]</U></B> was recently picked up by a nearby stations sensors in your sector. If it came into contact with your ship or "
-	src.text += "electrical equipment, it may have had hazardarous and unpredictable effect. Closely observe any non carbon based life forms "
-	src.text += "for signs of unusual behaviour, but keep this information discreet at all times due to this possibly dangerous scenario."
-	src.text += "<BR><HR>"
-
 /datum/intercept_text/proc/build_changeling(datum/mind/correct_person)
 	var/cname = pick(src.changeling_names)
 	var/orgname1 = pick(src.org_names_1)
@@ -290,3 +283,9 @@
 	src.text += "These lifeforms are associated with the <B><U>[orgname1] [orgname2]</U></B> and may be attempting to acquire sensitive materials on their behalf.  "
 	src.text += "Please take care not to alarm the crew, as <B><U>[cname]</U></B> may take advantage of a panic situation. Remember, they can be anybody, suspect everybody!"
 	src.text += "<BR><HR>"
+
+/datum/intercept_text/proc/build_shadowling(datum/mind/correct_person)
+	src.text += "<br><br>Sightings of strange alien creatures have been observed in your area. These aliens supposedly possess the ability to enslave unwitting personnel and leech from their power. \
+	Be wary of dark areas and ensure all lights are kept well-maintained. Closely monitor all crew for suspicious behavior and perform dethralling surgery if they have obvious tells. Investigate all \
+	reports of odd or suspicious sightings in maintenance."
+	src.text += "<br><br>"

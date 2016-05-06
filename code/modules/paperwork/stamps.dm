@@ -5,7 +5,7 @@
 	icon_state = "stamp-ok"
 	item_state = "stamp"
 	throwforce = 0
-	w_class = 1.0
+	w_class = 1
 	throw_speed = 3
 	throw_range = 7
 	materials = list(MAT_METAL=60)
@@ -72,7 +72,7 @@
 
 // Syndicate stamp to forge documents.
 
-/obj/item/weapon/stamp/chameleon/attack_self(mob/user as mob)
+/obj/item/weapon/stamp/chameleon/attack_self(mob/user)
 
 	var/list/stamp_types = typesof(/obj/item/weapon/stamp) - src.type // Get all stamp types except our own
 	var/list/stamps = list()

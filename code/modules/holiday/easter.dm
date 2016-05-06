@@ -29,7 +29,7 @@
 	for(var/obj/effect/landmark/R in landmarks_list)
 		if(R.name != "blobspawn")
 			if(prob(35))
-				if(istype(R.loc,/turf/space))
+				if(istype(R.loc,/turf/open/space))
 					new /mob/living/simple_animal/chicken/rabbit/space(R.loc)
 				else
 					new /mob/living/simple_animal/chicken/rabbit(R.loc)
@@ -38,9 +38,9 @@
 	name = "\improper rabbit"
 	desc = "The hippiest hop around."
 	icon = 'icons/mob/Easter.dmi'
-	icon_state = "rabbit"
-	icon_living = "rabbit"
-	icon_dead = "rabbit_dead"
+	icon_state = "rabbit_white"
+	icon_living = "rabbit_white"
+	icon_dead = "rabbit_white_dead"
 	speak = list("Hop into Easter!","Come get your eggs!","Prizes for everyone!")
 	speak_emote = list("sniffles","twitches")
 	emote_hear = list("hops.")
@@ -56,13 +56,13 @@
 
 /mob/living/simple_animal/chicken/rabbit/space
 	icon_prefix = "s_rabbit"
-	icon_state = "s_rabbit"
-	icon_living = "s_rabbit"
-	icon_dead = "s_rabbit_dead"
+	icon_state = "s_rabbit_white"
+	icon_living = "s_rabbit_white"
+	icon_dead = "s_rabbit_white_dead"
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	minbodytemp = 0
 	maxbodytemp = 1500
-	unsuitable_atmos_damage = 0	//This damage is taken when atmos doesn't fit all the requirements above
+	unsuitable_atmos_damage = 0
 
 //Easter Baskets
 /obj/item/weapon/storage/bag/easterbasket
@@ -91,8 +91,7 @@
 	item_state = "bunnyhead"
 	desc = "Considerably more cute than 'Frank'"
 	slowdown = -1
-	flags = BLOCKHAIR
-	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
 
 /obj/item/clothing/suit/bunnysuit
 	name = "Easter Bunny Suit"
@@ -116,7 +115,7 @@
 	icon_state = "egg-[color]"
 	item_color = "[color]"
 
-/obj/item/weapon/reagent_containers/food/snacks/egg/proc/dispensePrize(var/turf/where)
+/obj/item/weapon/reagent_containers/food/snacks/egg/proc/dispensePrize(turf/where)
 	var/won = pick(/obj/item/clothing/head/bunnyhead,
 	/obj/item/clothing/suit/bunnysuit,
 	/obj/item/weapon/reagent_containers/food/snacks/grown/carrot,
@@ -133,7 +132,7 @@
 	new won(where)
 	new/obj/item/weapon/reagent_containers/food/snacks/chocolateegg(where)
 
-/obj/item/weapon/reagent_containers/food/snacks/egg/attack_self(mob/user as mob)
+/obj/item/weapon/reagent_containers/food/snacks/egg/attack_self(mob/user)
 	..()
 	if(containsPrize)
 		user << "<span class='notice'>You unwrap the [src] and find a prize inside!</span>"

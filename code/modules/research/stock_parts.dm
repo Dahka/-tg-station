@@ -18,7 +18,7 @@
 	var/pshoom_or_beepboopblorpzingshadashwoosh = 'sound/items/rped.ogg'
 	var/alt_sound = null
 
-/obj/item/weapon/storage/part_replacer/afterattack(obj/machinery/T as obj, mob/living/carbon/human/user as mob, flag, params)
+/obj/item/weapon/storage/part_replacer/afterattack(obj/machinery/T, mob/living/carbon/human/user, flag, params)
 	if(flag)
 		return
 	else
@@ -33,7 +33,6 @@
 	name = "bluespace rapid part exchange device"
 	desc = "A version of the RPED that allows for replacement of parts and scanning from a distance, along with higher capacity for parts."
 	icon_state = "BS_RPED"
-	item_state = "BS_RPED"
 	w_class = 3
 	storage_slots = 400
 	max_w_class = 3
@@ -62,19 +61,19 @@
 
 //Sorts stock parts inside an RPED by their rating.
 //Only use /obj/item/weapon/stock_parts/ with this sort proc!
-/proc/cmp_rped_sort(var/obj/item/weapon/stock_parts/A, var/obj/item/weapon/stock_parts/B)
+/proc/cmp_rped_sort(obj/item/weapon/stock_parts/A, obj/item/weapon/stock_parts/B)
 	return B.rating - A.rating
 
 /obj/item/weapon/stock_parts
 	name = "stock part"
 	desc = "What?"
 	icon = 'icons/obj/stock_parts.dmi'
-	w_class = 2.0
+	w_class = 2
 	var/rating = 1
 
 /obj/item/weapon/stock_parts/New()
-	src.pixel_x = rand(-5.0, 5)
-	src.pixel_y = rand(-5.0, 5)
+	src.pixel_x = rand(-5, 5)
+	src.pixel_y = rand(-5, 5)
 
 //Rating 1
 
@@ -115,7 +114,7 @@
 
 /obj/item/weapon/stock_parts/matter_bin
 	name = "matter bin"
-	desc = "A container for hold compressed matter awaiting re-construction."
+	desc = "A container designed to hold compressed matter awaiting reconstruction."
 	icon_state = "matter_bin"
 	origin_tech = "materials=1"
 	materials = list(MAT_METAL=80)
@@ -156,7 +155,7 @@
 
 /obj/item/weapon/stock_parts/matter_bin/adv
 	name = "advanced matter bin"
-	desc = "A container for hold compressed matter awaiting re-construction."
+	desc = "A container designed to hold compressed matter awaiting reconstruction."
 	icon_state = "advanced_matter_bin"
 	origin_tech = "materials=3"
 	rating = 2
@@ -198,7 +197,7 @@
 
 /obj/item/weapon/stock_parts/matter_bin/super
 	name = "super matter bin"
-	desc = "A container for hold compressed matter awaiting re-construction."
+	desc = "A container designed to hold compressed matter awaiting reconstruction."
 	icon_state = "super_matter_bin"
 	origin_tech = "materials=5"
 	rating = 3
@@ -240,7 +239,7 @@
 
 /obj/item/weapon/stock_parts/matter_bin/bluespace
 	name = "bluespace matter bin"
-	desc = "A container for hold compressed matter awaiting re-construction."
+	desc = "A container designed to hold compressed matter awaiting reconstruction."
 	icon_state = "bluespace_matter_bin"
 	origin_tech = "materials=6"
 	rating = 4

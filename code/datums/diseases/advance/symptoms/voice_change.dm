@@ -25,14 +25,14 @@ Bonus
 	level = 6
 	severity = 2
 
-/datum/symptom/voice_change/Activate(var/datum/disease/advance/A)
+/datum/symptom/voice_change/Activate(datum/disease/advance/A)
 	..()
 	if(prob(SYMPTOM_ACTIVATION_PROB))
 
 		var/mob/living/carbon/M = A.affected_mob
 		switch(A.stage)
 			if(1, 2, 3, 4)
-				M << "<span class='notice'>[pick("Your throat hurts.", "You clear your throat.")]</span>"
+				M << "<span class='warning'>[pick("Your throat hurts.", "You clear your throat.")]</span>"
 			else
 				if(ishuman(M))
 					var/mob/living/carbon/human/H = M
@@ -40,7 +40,7 @@ Bonus
 
 	return
 
-/datum/symptom/voice_change/End(var/datum/disease/advance/A)
+/datum/symptom/voice_change/End(datum/disease/advance/A)
 	..()
 	if(ishuman(A.affected_mob))
 		var/mob/living/carbon/human/H = A.affected_mob

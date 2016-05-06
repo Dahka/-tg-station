@@ -2,6 +2,7 @@
 	icon = 'icons/obj/assemblies.dmi'
 	name = "tank transfer valve"
 	icon_state = "valve_1"
+	item_state = "ttv"
 	desc = "Regulates the transfer of air between two tanks"
 	var/obj/item/weapon/tank/tank_one
 	var/obj/item/weapon/tank/tank_two
@@ -59,12 +60,7 @@
 		attacher = user
 	return
 
-
-/obj/item/device/transfer_valve/HasProximity(atom/movable/AM as mob|obj)
-	if(!attached_device)	return
-	attached_device.HasProximity(AM)
-	return
-/obj/item/device/transfer_valve/attack_self(mob/user as mob)
+/obj/item/device/transfer_valve/attack_self(mob/user)
 	user.set_machine(src)
 	var/dat = {"<B> Valve properties: </B>
 	<BR> <B> Attachment one:</B> [tank_one] [tank_one ? "<A href='?src=\ref[src];tankone=1'>Remove</A>" : ""]
@@ -114,7 +110,7 @@
 		return
 	return
 
-/obj/item/device/transfer_valve/proc/process_activation(var/obj/item/device/D)
+/obj/item/device/transfer_valve/proc/process_activation(obj/item/device/D)
 	if(toggle)
 		toggle = 0
 		toggle_valve()
@@ -168,7 +164,7 @@
 		var/attachment = "no device"
 		if(attached_device)
 			if(istype(attached_device, /obj/item/device/assembly/signaler))
-				attachment = "<A HREF='?_src_=holder;secretsadmin=list_signalers'>[attached_device]</A>"
+				attachment = "<A HREF='?_src_=holder;secrets=list_signalers'>[attached_device]</A>"
 			else
 				attachment = attached_device
 
